@@ -1,7 +1,9 @@
+#!/usr/local/bin/python2.7
+
 import sqlite3
 
 conn = sqlite3.connect('twelth_man.db')
-print ("Opened databsse successfully")
+print ("Opened database successfully")
 
 
 def create_db():
@@ -9,7 +11,7 @@ def create_db():
 	with conn:
 		cursor = conn.cursor()
 		cursor.execute("DROP IF TABLE EXISTS Contacts")
-		cursor.execute("CREATE TABLE Contacts (Match INTEGER, Date TEXT, Opposition TEXT, Venue TEXT, Format TEXT");")
+		cursor.execute("""CREATE TABLE Contacts (Match INTEGER, Date TEXT, Opposition TEXT, Venue TEXT, Format TEXT""")
 		cursor.commit()
 
 def fixtures():

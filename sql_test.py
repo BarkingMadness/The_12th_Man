@@ -16,7 +16,7 @@ class Database():
         self.format = ""
 
 
-    def input(self):
+    def input_fixtures(self):
         self.date = raw_input("Date of game: ")
         self.opposition = raw_input("Opposition: ")
         self.venue = raw_input("Venue: ")
@@ -32,6 +32,7 @@ class Database():
             cur.execute("INSERT INTO Fixtures VALUES (?, ?, ?, ?);", (self.date, self.opposition, self.venue, self.format))
             con.commit()
 
+
     def display_db(self):
         print "\nHere's a listing of all the records in the table:\n"
         with con:
@@ -43,7 +44,7 @@ class Database():
 
 
     def main_loop(self):
-        fixture_input = self.input()
+        fixture_input = self.input_fixtures()
         update_db = self.create_db()
         view_db = self.display_db()
 

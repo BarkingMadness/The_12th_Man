@@ -23,7 +23,7 @@ class Database():
         self.date = raw_input("Date of game: ")
         self.opposition = raw_input("Opposition: ")
         self.venue = raw_input("Venue: ")
-        self.format = raw_input("Format: ")
+        self.formats = raw_input("Format: ")
         return self.date, self.opposition, self.venue, self.formats
 
 

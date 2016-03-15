@@ -6,7 +6,7 @@ import sqlite3
 
 # open the database and print message when it works. create a cursor object & table if it doesnt exist.
 
-con = sqlite3.connect('12thman_test.db')
+con = sqlite3.connect('The_12th_Man.db')
 print ("Opened database successfully")
 cur = con.cursor()
 cur.execute("CREATE TABLE IF NOT EXISTS Fixtures (game_date TEXT, opposition TEXT, venue TEXT, formats TEXT);")
@@ -62,7 +62,7 @@ class Database():
     # displays all the fixtures currently in the database.
 
     def view_fixtures(self):
-        print "\nList of Fixtures:\n"
+        print "\nList of Fixtures:\n-----------------\n"
         with con:
             cur = con.cursor()
             cur.execute("SELECT * FROM Fixtures ORDER BY game_date ASC")
@@ -70,14 +70,15 @@ class Database():
             for row in rows:
                 print row
 
-        print "\nView match details? \n"
+        print "\nView match details? \n-------------------\n"
         self.view_date = raw_input("Enter date: ")
         with con:
             cur = con.cursor()
-            cur.execute("select * from Fixtures where game_date = '%s'" % self.view_date)
+            cur.execute("select * from Fixtures where game_date = '%s'" % self.view_date)   #insecure?
             for row in cur:
                 print row
                 con.commit()
+
 
 
     # main loop to run the methods in the Database class.

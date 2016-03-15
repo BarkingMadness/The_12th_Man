@@ -2,7 +2,7 @@
 
 """Test program using SQLite3 to allow user to enter a fixture then display all fixtures in the database."""
 
-#import sqlite3 to enable creation of database
+#import sqlite3 library to enable use of database
 
 import sqlite3
 

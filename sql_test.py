@@ -26,7 +26,7 @@ class Database():
 
     # allows the user to make a choice from the menu
 
-    def menu():
+    def menu(self):
         print "\n------------------------"
         print "1. Enter Fixtures"
         print "2. View Fixtures"
@@ -34,12 +34,12 @@ class Database():
         option = raw_input("Make a selection: ")
 
         if option == "1":
-            input_fixtures()
+            self.input_fixtures()
         elif option == "2":
-            show_fixtures()
+            self.view_fixtures()
         else:
             print "That is not an option"
-            menu()
+            self.menu()
 
     # asks the user to input fixture details and return values
 
@@ -50,19 +50,18 @@ class Database():
         self.formats = raw_input("Format: ")
         return self.game_date, self.opposition, self.venue, self.formats
 
-    # take the user entered fixtures details and add them to the database. sort them by date
+    # take the user entered fixtures details and add them to the table 'Fixtures'. If one doesn't already exist, create it.
 
     def update_db(self):
         with con:
             cur = con.cursor()
-            # cur.execute("DROP TABLE IF EXISTS Fixtures")
             cur.execute("CREATE TABLE IF NOT EXISTS Fixtures (date TEXT, opposition TEXT, venue TEXT, formats TEXT);")
             cur.execute("INSERT INTO Fixtures VALUES (?, ?, ?, ?);", (self.game_date, self.opposition, self.venue, self.formats))
             con.commit()
 
     # displays all the fixtures currently in the database.
 
-    def show_fixtures(self):
+    def view_fixtures(self):
         print "\nList of Fixtures:\n"
         with con:
             cur = con.cursor()
@@ -75,9 +74,9 @@ class Database():
     # main loop to run the methods in the Database class.
 
     def main_loop(self):
-        fixture_input = self.input_fixtures()
-        update_db = self.update_db()
-        view_db = self.show_fixtures()
+        self.menu()
+        self.update_db()
+        self.menu()
 
 
 if __name__ == '__main__':

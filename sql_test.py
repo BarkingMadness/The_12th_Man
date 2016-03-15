@@ -1,12 +1,11 @@
 #!/usr/local/bin/python2.7
 
-#!/usr/local/bin/python2.7
-
 import sqlite3
 
 con = sqlite3.connect('twelth_man.db')
 print ("Opened database successfully")
-
+cur = con.cursor()
+cur.execute("CREATE TABLE IF NOT EXISTS Fixtures (date TEXT, opposition TEXT, venue TEXT, formats TEXT);")
 
 
 class Database():
@@ -27,12 +26,13 @@ class Database():
         return self.date, self.opposition, self.venue, self.formats
 
 
-    def create_db(self):
+    def update_db(self):
         with con:
             cur = con.cursor()
             # cur.execute("DROP TABLE IF EXISTS Fixtures")
             cur.execute("CREATE TABLE IF NOT EXISTS Fixtures (date TEXT, opposition TEXT, venue TEXT, formats TEXT);")
             cur.execute("INSERT INTO Fixtures VALUES (?, ?, ?, ?);", (self.date, self.opposition, self.venue, self.formats))
+            cur.execute("SELECT * FROM Fixtures ORDER BY date ASC")
             con.commit()
 
 
@@ -41,7 +41,7 @@ class Database():
         with con:
             cur = con.cursor()
             cur.execute("SELECT * FROM Fixtures")
-            # cur.execute ("SELECT * FROM Fixtures ORDER BY date ASC")
+
             rows = cur.fetchall()
             for row in rows:
                 print row
@@ -49,7 +49,7 @@ class Database():
 
     def main_loop(self):
         fixture_input = self.input_fixtures()
-        update_db = self.create_db()
+        update_db = self.update_db()
         view_db = self.display_db()
 
 

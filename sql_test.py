@@ -1,11 +1,9 @@
 #!/usr/local/bin/python2.7
 
 #import sqlite3 library to enable use of database
-
 import sqlite3
 
 # open the database and print message when it works. create a cursor object & table if it doesnt exist.
-
 con = sqlite3.connect('12thman_test.db')
 print ("Opened database successfully")
 cur = con.cursor()

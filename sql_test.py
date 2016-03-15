@@ -12,11 +12,9 @@ cur = con.cursor()
 cur.execute("CREATE TABLE IF NOT EXISTS Fixtures (game_date TEXT, opposition TEXT, venue TEXT, formats TEXT);")
 
 # create a class called database to handle inputting, outputting and display of database information.
-
 class Database():
 
     # init class variables used to crreate fixture information.
-
     def __init__(self):
 
         self.game_date = ""
@@ -25,7 +23,6 @@ class Database():
         self.formats = ""
 
     # allows the user to make a choice from the menu
-
     def menu(self):
         print "\n------------------------"
         print "1. Enter Fixtures"
@@ -42,7 +39,6 @@ class Database():
             self.menu()
 
     # asks the user to input fixture details and return values
-
     def input_fixtures(self):
         self.game_date = raw_input("Date of game: ")
         self.opposition = raw_input("Opposition: ")
@@ -51,7 +47,6 @@ class Database():
         return self.game_date, self.opposition, self.venue, self.formats
 
     # take the user entered fixtures details and add them to the table 'Fixtures'. If one doesn't already exist, create it.
-
     def update_db(self):
         with con:
             cur = con.cursor()
@@ -60,7 +55,6 @@ class Database():
             con.commit()
 
     # displays all the fixtures currently in the database.
-
     def view_fixtures(self):
         print "\nList of Fixtures:\n"
         with con:
@@ -72,7 +66,6 @@ class Database():
                 print row
 
     # main loop to run the methods in the Database class.
-
     def main_loop(self):
         self.menu()
         self.update_db()

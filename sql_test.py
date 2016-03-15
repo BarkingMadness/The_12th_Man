@@ -1,15 +1,21 @@
 #!/usr/local/bin/python2.7
 
+#import sqlite3 to enable creation of database
 
 import sqlite3
+
+# open the database and print message when it works. create a cursor object & table if it doesnt exist.
 
 con = sqlite3.connect('twelth_man.db')
 print ("Opened database successfully")
 cur = con.cursor()
 cur.execute("CREATE TABLE IF NOT EXISTS Fixtures (date TEXT, opposition TEXT, venue TEXT, formats TEXT);")
 
+# create a class called database to handle inputting, outputting and display of database information.
 
 class Database():
+    
+    # init class variables used to crreate fixture information.
 
     def __init__(self):
 
@@ -18,6 +24,7 @@ class Database():
         self.venue = ""
         self.formats = ""
 
+    # asks user to input fixture details and return values
 
     def input_fixtures(self):
         self.date = raw_input("Date of game: ")
@@ -26,6 +33,7 @@ class Database():
         self.formats = raw_input("Format: ")
         return self.date, self.opposition, self.venue, self.formats
 
+    # take the user entered fixtures details and add them to the database. sort them by date (NOT WORKING!)
 
     def update_db(self):
         with con:
@@ -36,6 +44,7 @@ class Database():
             cur.execute("SELECT * FROM Fixtures ORDER BY date ASC")
             con.commit()
 
+    # display all fixtures entered into the database.
 
     def display_db(self):
         print "\nList of Fixtures:\n"
@@ -47,12 +56,14 @@ class Database():
             for row in rows:
                 print row
 
+    # main loop to run the methods in the Database class.
 
     def main_loop(self):
         fixture_input = self.input_fixtures()
         update_db = self.update_db()
         view_db = self.display_db()
 
+# runs the programme.
 
 if __name__ == '__main__':
     input = Database()

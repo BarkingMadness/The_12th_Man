@@ -1,7 +1,5 @@
 #!/usr/local/bin/python2.7
 
-#import sqlite3 library to enable use of database
-
 import sqlite3
 
 # open the database and print message when it works. create a cursor object & table if it doesnt exist.
@@ -9,7 +7,7 @@ import sqlite3
 con = sqlite3.connect('The_12th_Man.db')
 print ("Opened database successfully")
 cur = con.cursor()
-cur.execute("CREATE TABLE IF NOT EXISTS Fixtures (game_date TEXT, opposition TEXT, venue TEXT, formats TEXT);")
+cur.execute("CREATE TABLE IF NOT EXISTS Fixtures (id INTEGER PRIMARY KEY AUTOINCREMENT, game_date TEXT, opposition TEXT, venue TEXT, formats TEXT);")
 
 # create a class called database to handle inputting, outputting and display of database information.
 
@@ -55,8 +53,9 @@ class Database():
     def update_db(self):
         with con:
             cur = con.cursor()
-            cur.execute("CREATE TABLE IF NOT EXISTS Fixtures (date TEXT, opposition TEXT, venue TEXT, formats TEXT);")
-            cur.execute("INSERT INTO Fixtures VALUES (?, ?, ?, ?);", (self.game_date, self.opposition, self.venue, self.formats))
+            # cur.execute("CREATE TABLE IF NOT EXISTS Fixtures (date TEXT, opposition TEXT, venue TEXT, formats TEXT);")
+            cur.execute('''INSERT INTO Fixtures (game_date, opposition, venue, formats) VALUES(?,?,?,?)''', (self.game_date, self.opposition, self.venue, self.formats))
+            # cur.execute("INSERT INTO Fixtures VALUES (?, ?, ?, ?);", (self.game_date, self.opposition, self.venue, self.formats))
             con.commit()
 
     # displays all the fixtures currently in the database.

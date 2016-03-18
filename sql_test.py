@@ -53,9 +53,7 @@ class Database():
     def update_db(self):
         with con:
             cur = con.cursor()
-            # cur.execute("CREATE TABLE IF NOT EXISTS Fixtures (date TEXT, opposition TEXT, venue TEXT, formats TEXT);")
             cur.execute('''INSERT INTO Fixtures (game_date, opposition, venue, formats) VALUES(?,?,?,?)''', (self.game_date, self.opposition, self.venue, self.formats))
-            # cur.execute("INSERT INTO Fixtures VALUES (?, ?, ?, ?);", (self.game_date, self.opposition, self.venue, self.formats))
             con.commit()
 
     # displays all the fixtures currently in the database.

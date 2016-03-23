@@ -7,8 +7,7 @@ import sqlite3
 con = sqlite3.connect('test5.db')
 print ("Opened database successfully")
 cur = con.cursor()
-cur.execute("""CREATE TABLE IF NOT EXISTS Fixtures (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                game_date TEXT, opposition TEXT, venue TEXT, formats TEXT,
+cur.execute("""CREATE TABLE IF NOT EXISTS Fixtures (game_date TEXT, opposition TEXT, venue TEXT, formats TEXT,
                                                 runs INTEGER, not_out TEXT, fours INTEGER, sixes INTEGER, dismissal TEXT, bat_av INTEGER,
                                                 overs REAL, mdns INTEGER, runs_con INTEGER, wickets INTEGER, econ REAL);""")
 

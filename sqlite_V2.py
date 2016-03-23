@@ -112,17 +112,17 @@ class DataInput():
             else:
                 print("Not found...")
 
-            cur.execute("SELECT * from Fixtures WHERE game_date = '%s'" % self.view_date)
+            cur.execute("SELECT * from Fixtures WHERE game_date=?", (self.view_date,))
             for row in cur:
                 print row
                 con.commit()
         self.runs = raw_input("Runs Scored: ")
-        #self.not_out = raw_input("Not out?: ")
-        #self.fours = raw_input("Fours Scored: ")
-        #self.sixes = raw_input("Sixes scored: ")
-        #self.dismissal = raw_input("Method of dismissal: ")
+        self.not_out = raw_input("Not out?: ")
+        self.fours = raw_input("Fours Scored: ")
+        self.sixes = raw_input("Sixes scored: ")
+        self.dismissal = raw_input("Method of dismissal: ")
 
-        cur.execute("UPDATE Fixtures SET runs=? WHERE game_date=?", (self.runs, self.view_date))
+        cur.execute("UPDATE Fixtures SET runs=?, not_out=?, fours=?, sixes=?, dismissal=? WHERE game_date=?", (self.runs, self.not_out, self.fours, self.sixes, self.dismissal, self.view_date,))
         con.commit()
 
 
@@ -138,9 +138,9 @@ class Stats():
 
 if __name__ == '__main__':
     while True:
-        print "\n\n--------------------\n12th Man - Main Menu \n--------------------\n"
-        print "1. Enter Data"
-        print "2. View Stats"
+        print "\n\n--------------------\nThe 12th Man - Main Menu \n--------------------\n"
+        print "1. Enter & View Game Information"
+        print "2. View Game Stats"
         print "3. Exit Program"
 
         choice = raw_input("\nMake a Selection: ")
